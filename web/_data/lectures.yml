@@ -1,0 +1,328 @@
+# ==================
+# Week 1
+#
+- 
+  date: 2015-01-19
+  break: MLK Day
+-
+  date: 2015-01-21
+  info: |
+    [Getting-to-know you quiz](lec/l1quiz.html),
+    [course logistics](syllabus.html), and
+    intro to nonlinear equations in 1D
+  hw:
+    - PS1 out
+-
+  date: 2015-01-23
+  info: |
+    One-dimensional nonlinear equations
+  hw:
+    - Read 3.1-3.4
+#
+# ==================
+# Week 2
+#
+- 
+  date: 2015-01-26
+  info: |
+    How to think about matrix multiply
+  hw:
+    - PS2 out
+-
+  date: 2015-01-28
+  info: |
+    Vector spaces, norms, singular values
+  hw:
+    - Read 4.1-4.2
+    - PS1 due
+-
+  date: 2015-01-30
+  info: |
+    Problems
+#
+# ==================
+# Week 3
+#
+-
+  date: 2015-02-02
+  info: |
+    Special matrices
+  hw:
+    - Read 4.3-4.4    
+    - PS2 due
+    - PS3 out
+-
+  date: 2015-02-04
+  info: |
+    Sensitivity of linear systems and floating point
+  hw:
+    - Read 5.8 and Ch 2    
+-
+  date: 2015-02-06
+  info: |
+    Sensitivity of linear systems and floating point;
+    iterative refinement
+#
+# ==================
+# Week 4
+#
+-
+  date: 2015-02-09
+  info: |
+    Guest lecture: Gaussian elimination
+  hw:
+    - Read 5.1-5.2
+    - PS3 due
+    - PS4 out
+-
+  date: 2015-02-11
+  info: |
+    Pivoting and blocking;
+    Cholesky
+  hw:
+    - Read 5.4-5.5
+-
+  date: 2015-02-13
+  info: |
+    Finish Cholesky;
+    conditioning and error estimation
+  hw:
+    - Read 5.8
+#
+# ==================
+# Week 5
+#
+-
+  date: 2015-02-16
+  break: February Break
+-
+  date: 2015-02-18
+  info: |
+    Banded and sparse Gaussian elimination
+  hw:
+    - Read 5.6-5.7
+    - PS4 due
+    - PP1 out
+-
+  date: 2015-02-20
+  info: |
+    Banded and sparse Gaussian elimination
+#
+# ==================
+# Week 6
+#
+-
+  date: 2015-02-23
+  info: |
+    Least squares, geometry and normal equations, sensitivity
+  hw:
+    - Read 6.1
+    - PS5 out
+-
+  date: 2015-02-25
+  info: |
+    Gram-Schmidt and Householder QR
+  hw:
+    - Read 6.2-6.3
+    - PP1 due
+-
+  date: 2015-02-27
+  info: |
+    Weighted and constrained least squares
+#
+# ==================
+# Week 7
+#
+-
+  date: 2015-03-02
+  info: |
+    Review
+  hw:
+    - PP1 reviews
+    - PS5 due
+-
+  date: 2015-03-04
+  info: |
+    In-class midterm
+-
+  date: 2015-03-06
+  info: |
+    - Intro to iterative methods
+  hw:
+    - Read 7.1-7.3
+#
+# ==================
+# Week 8
+#
+-
+  date: 2015-03-09
+  info: |
+    Conjugate gradients and Krylov subspaces
+  hw:
+    - Read 7.4-7.5
+    - PP1 final
+    - PP2 out
+-
+  date: 2015-03-11
+  info: |
+    Preconditioned iterations, multigrid, domain decomposition
+  hw:
+    - Read 7.6
+-
+  date: 2015-03-13
+  info: |
+    Practical solver advice
+#
+# ==================
+# Week 9
+#
+-
+  date: 2015-03-16
+  info: Guest lecture
+  hw:
+    - PS6 out
+-
+  date: 2015-03-18
+  info: |
+    Introduction to eigenproblems
+  hw:
+    - Read 8.1
+    - PP2 due
+-
+  date: 2015-03-20
+  info: |
+    Power methods and variants
+#
+# ==================
+# Week 10
+#
+-
+  date: 2015-03-23
+  info: |
+    Singular value methods
+  hw:
+    - Read 8.2
+    - PP2 reviews
+    - PS6 due
+-
+  date: 2015-03-25
+  info: |
+    Eigensolver iterations
+  hw:
+    - Read 8.3
+-
+  date: 2015-03-27
+  info: |
+    Templates for eigenproblems
+  hw:
+    - PP2 final
+#
+# ==================
+# Week 11 (spring break)
+#
+-
+  date: 2015-03-30
+  break: Spring Break
+-
+  date: 2015-04-01
+  break: Spring Break
+-
+  date: 2015-04-03
+  break: Spring Break
+#
+# ==================
+# Week 12
+#
+-
+  date: 2015-04-06
+  info: |
+    Newton for nonlinear systems; read 9.1
+  hw:
+    - PS7 out
+-
+  date: 2015-04-08
+  info: |
+    Line search, trust regions, globalization
+-
+  date: 2015-04-10
+  info: |
+    Newton for optimization
+  hw:
+    - Read 9.2
+#
+# ==================
+# Week 13
+#
+-
+  date: 2015-04-13
+  info: |
+    Quasi-Newton methods
+  hw:
+    - PS7 due
+    - PP3 out
+-
+  date: 2015-04-15
+  info: |
+    Continuation methods
+-
+  date: 2015-04-17
+  info: |
+    Problem session
+#
+# ==================
+# Week 14
+#
+-
+  date: 2015-04-20
+  info: |
+    Optimization basics
+  hw:
+    - Re-read 9.2
+    - PS8 out
+-
+  date: 2015-04-22
+  info: |
+    Dealing with constraints
+  hw:
+    - Read 9.3
+    - PP3 due
+-
+  date: 2015-04-24
+  info: |
+    Global optimization
+#
+# ==================
+# Week 15
+#
+-
+  date: 2015-04-27
+  info: |
+    Special topics
+  hw:
+    - PS8 due
+    - PP3 reviews
+    - PS9 out
+-
+  date: 2015-04-29
+  info: |
+    Special topics
+-
+  date: 2015-05-01
+  info: |
+    Special topics
+  hw:
+    - PP3 final
+#
+# ==================
+# Week 16
+#
+-
+  date: 2015-05-04
+  info: |
+    Review
+  hw:
+    - PS9 due
+-
+  date: 2015-05-06
+  info: |
+    Review

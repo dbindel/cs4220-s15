@@ -1,0 +1,12 @@
+title: David Bindel
+email: bindel@cornell.edu
+description: Academic home page for David Bindel
+baseurl: "/~bindel/class/cs4220-s15/"
+url: "http://www.cs.cornell.edu/"
+
+encoding: utf-8
+timezone: America/New_York
+
+exclude: ["Rakefile"]
+
+markdown: kramdown
