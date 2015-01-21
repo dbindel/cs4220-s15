@@ -10,7 +10,7 @@ def get_hash
 end
 
 def set_hash
-  head_sha = `git rev-parse -- HEAD`
+  head_sha = `git rev-parse HEAD`
   File.open(".rake-sha", "w") { |f| f.write(head_sha) }
   head_sha
 end
