@@ -3,4 +3,30 @@
 
 \begin{document} \hdr{PS 1}{Weds, Jan 28}
 
+\paragraph*{1: By the book}
+Book section 3.6, problems 1, 4, 5
+
+\paragraph*{2: Water, water}
+The dispersion relation for shallow water waves is
+\[
+  \omega^2 = k \left(g + \frac{T}{\rho} k^2 \right) \tanh(k h)
+\]
+where
+\begin{align*}
+  h &= \mbox{water depth} \\
+  k &= \mbox{spatial wave number ($2\pi$ / wave length)} \\
+  \omega &= \mbox{frequency ($2\pi$ / period)} \\
+  T &= \mbox{surface tension} \\
+  \rho &= \mbox{mass density} \\
+  g &= \mbox{gravitational acceleration}.
+\end{align*}
+For water at 25C, $T/\rho = 7.2 \times 10^{-5}$ N/m$^4$, 
+and the acceleration due to gravity is $g = 9.8$ m/s$^2$.
+Assuming these values, write a code using Newton's method
+to find $k$ given $\omega$ and $h$, assuming $kh \ll 1$.
+Your routine should take the form
+\begin{lstlisting}
+  function k = hw2p2(omega, h)
+\end{lstlisting}
+
 \end{document}
