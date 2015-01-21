@@ -3,6 +3,8 @@ title: Assignments
 layout: main
 ---
 
-<p>
-  No assignments yet!
-<p>
+<ul>
+{% for entry in site.data.hw reversed %}
+{%   include hw_entry.html %}
+{% endfor %}
+</ul>
