@@ -1,0 +1,60 @@
+\documentclass[12pt, leqno]{article}
+\input{common}
+
+\begin{document}
+\hdr{2015-01-21}
+
+\section{Logistics}
+
+\begin{itemize}
+\item Welcome to CS 4220/5223 / MATH 4260!
+\item Please make sure you can access CMS and Piazza
+\item PS1 is posted and will be due in one week
+\end{itemize}
+
+\section{Overview}
+
+Scientific computing involves mathematics, computation, and
+applications.  We will be undertaking all three, and have students in
+the class who are majoring in all three (math majors, CS majors, and
+majors in various science and engineering disciplines).  I have put
+prerequisites on the syllabus, and we are also doing a short
+assessment at the start of class.  The quiz is not graded, but if you
+have trouble with these questions, you may want to come talk to me
+about whether this is the right class for you.
+
+My intention is that you should read the book or other readings in
+advance, so that we can spend as much class time as possible working
+problems and getting past any points of confusion.  Bring laptops to class!
+Also bring paper and a writing instrument.  You'll need both.
+
+\section{Nonlinear equations}
+
+Consider a cannon fired on flat ground.  We can control the angle of
+$\theta$, but not the muzzle velocity $V_0$.  We want to hit a
+designated target.
+\begin{itemize}
+\item
+  What is a model we can analyze computationally?
+\item
+  What modeling assumptions are you making?
+\item
+  How do you compute the target angle?
+\item
+  What could go wrong with the computation?
+\item
+  What are the sources of error?  How sensitive are you to them?
+\end{itemize}
+
+Of course, if we had infinite ammunition, we could start shooting and
+adjust the angle based on how close we are to the target.  The
+simplest version of this is bisection: figure out angles that
+overshoot and undershoot (a bracketing interval), then test an angle
+halfway between.  This will give a new bracketing interval based on
+whether we overshot or undershot.
+
+An alternate approach is to build a simplified local model of our
+model, something sufficiently simple that we can solve it.  Each time
+we solve, we do another simplification.
+
+\end{document}
