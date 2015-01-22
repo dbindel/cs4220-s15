@@ -11,6 +11,10 @@
     PS1 is up!  Due by next Wednesday, Jan 28.
 -
   date: 2015-01-21
-  test:
+  text:
     OH for Thursday, Jan 22 are canceled due to conflict with a
     pre-arranged exam.  I will be available by appointment.
+-
+  date: 2015-01-22
+  text:
+    Please submit PS1 problem 2 as ps2water (fixed typo).
