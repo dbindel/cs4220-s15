@@ -26,8 +26,9 @@
 - 
   date: 2015-01-26
   info: |
-    How to think about matrix multiply
+    [How to think about matrix multiply](lec/2015-01-26-notes.pdf)
   hw:
+    - Read <a href="lec/2015-01-26-notes.pdf">notes</a>
     - PS2 out
 -
   date: 2015-01-28
