@@ -82,7 +82,7 @@ Some MATLAB references:
 - Hanselman and Littlefield, [_Mastering MATLAB7_][hanselman]
 - Or pick a favorite from the [many available][mathworks-books]
 
-[ag]: http://www.ec-securehost.com/SIAM/CS07.html
+[ag]: http://bookstore.siam.org/cs07/
 
 [meyer]: http://www.amazon.com/gp/product/0898714540/qid=1137779618/sr=2-1/ref=pd_bbs_b_2_1/002-5247186-8320001
 [lay]: http://www.amazon.com/Linear-Algebra-Its-Applications-Edition/dp/0321385179
