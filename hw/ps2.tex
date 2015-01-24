@@ -1,0 +1,34 @@
+\documentclass[12pt, leqno]{article}
+\input{common}
+
+\begin{document} \hdr{PS 2}{Mon, Feb 2}
+
+I recommend that you look at problem 2 early (this is related to the
+lecture for Jan 26 and associated notes).  Problems 5-10 are
+associated with the reading for Wednesday, Jan 28; I recommend you
+look at (though not necessarily attempt) the problems {\em before}
+reading the relevant book sections, and ideally before Wednesday's
+lecture.  You will find some of the problems are nearly solved -- or
+very similar problems are solved -- in the chapter text.
+
+\paragraph*{1: By the book}
+Book section 4.6, problems 5--10
+
+\paragraph*{2: Recognizing rank}
+Consider the MATLAB fragment
+
+\lstset{language=matlab,frame=lines,columns=flexible}
+\begin{lstlisting}
+function [y] = ps2mult(x)
+  n = length(x);
+  A = reshape(1:n^2, n, n);
+  y = A*x;
+\end{lstlisting}
+
+\begin{enumerate}
+\item What is $A$ for $n = 3$?
+\item Show that $A$ has rank two (independent of $n$).
+\item Rewrite {\tt ps2mult} so that it runs in $O(n)$ time.
+\end{enumerate}
+
+\end{document}
