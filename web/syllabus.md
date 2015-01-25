@@ -27,7 +27,7 @@ E-mail: <script type="text/javascript" language="javascript">
  function strrev(str) { return str.split("").reverse().join(""); }
  var name = '23bnb';
  var domain = 'cornell.edu';
- document.write(strrev(name) + '@' + domain + "<br/>OH: TBD");
+ document.write(strrev(name) + '@' + domain + "<br/>OH: F 5-7 in Gates G15");
 </script>
 
 ### Catalog description
