@@ -27,6 +27,7 @@
   date: 2015-01-26
   info: |
     [How to think about matrix multiply](lec/2015-01-26-notes.pdf)
+    *CANCELED* 
   hw:
     - Read <a href="lec/2015-01-26-notes.pdf">notes</a>
     - PS2 out
@@ -34,13 +35,13 @@
   date: 2015-01-28
   info: |
     Vector spaces, norms, singular values
+    *CANCELED* 
   hw:
     - Read 4.1-4.2
-    - PS1 due
 -
   date: 2015-01-30
   info: |
-    Problems
+    Whirlwhind review of LA, part 1
 #
 # ==================
 # Week 3
@@ -48,10 +49,9 @@
 -
   date: 2015-02-02
   info: |
-    Special matrices
+    Whirlwind review of LA, part 2
   hw:
     - Read 4.3-4.4    
-    - PS2 due
     - PS3 out
 -
   date: 2015-02-04
@@ -59,11 +59,14 @@
     Sensitivity of linear systems and floating point
   hw:
     - Read 5.8 and Ch 2    
+    - PS1 due
 -
   date: 2015-02-06
   info: |
     Sensitivity of linear systems and floating point;
     iterative refinement
+  hw:
+    - PS2 due
 #
 # ==================
 # Week 4
