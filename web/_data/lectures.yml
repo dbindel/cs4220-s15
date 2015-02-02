@@ -49,16 +49,18 @@
 -
   date: 2015-02-02
   info: |
-    Whirlwind review of LA, part 2
+    [Whirlwind review of LA, part 2](lec/2015-02-02-notes.pdf)
   hw:
-    - Read 4.3-4.4    
+    - Read 4.3-4.4
+    - Read <a href="lec/2015-02-02-notes.pdf">notes</a>
     - PS3 out
 -
   date: 2015-02-04
   info: |
-    Sensitivity of linear systems and floating point
+    [Sensitivity of linear systems and floating point](lec/2015-02-04-notes.pdf)
   hw:
     - Read 5.8 and Ch 2    
+    - Read <a href="lec/2015-02-04-notes.pdf">notes</a>
     - PS1 due
 -
   date: 2015-02-06

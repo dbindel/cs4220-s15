@@ -1,0 +1,220 @@
+\documentclass[12pt, leqno]{article}
+\input{common}
+
+\begin{document}
+\hdr{2015-02-02}
+
+\section*{Vector norms}
+
+A norm is a scalar-valued function from a vector space into the real
+numbers with the following properties:
+\begin{enumerate}
+\item {\em Positive-definiteness}: For any vector $x$, $\|x\| \geq 0$;
+  and $\|x\| = 0$ iff $x = 0$
+\item {\em Triangle inequality}: For any vectors $x$ and $y$, 
+  $\|x + y\| \leq \|x\| + \|y\|$
+\item {\em Homogeneity}: For any scalar $\alpha$ and vector $x$, 
+  $\| \alpha x \| = |\alpha| \|x\|$
+\end{enumerate}
+We will pay particular attention to three norms on $\bbR^n$ and $\bbC^n$:
+\begin{align*}
+  \|v\|_1 & = \sum_{i} |v_i| \\
+  \|v\|_{\infty} & = \max_{i} |v_i| \\
+  \|v\|_2 & = \sqrt{\sum_i |v_i|^2}
+\end{align*}
+Of the three properties, the triangle inequality is usually the one
+that takes the most work.
+
+If $\| \cdot \|$ is a norm and $M$ is any nonsingular square matrix,
+then $v \mapsto \|Mv\|$ is also a norm.  The case where $M$ is
+diagonal is particularly common in practice.
+
+In finite-dimensional spaces, all norms are equivalent.  That is, if
+$\|\cdot\|$ and $|\| \cdot \||$ are two norms on the same space, then
+there are constants $C_1, C_2 > 0$ such that for all $x$,
+\[
+  C_1 \|x\| \leq |\|x\|| \leq C_2 \|x\|.
+\]
+However, $C_1$ and $C_2$ are not necessarily small, so it makes sense
+to choose norms somewhat judiciously.  In particular, if different
+elements of $x$ have different units (furlongs and fortnights), it
+usually pays to nondimensionalize the problem before doing numerics;
+and this can be interpreted as choosing a diagonally scaled norm.
+
+\section*{Norms and inner products}
+
+An {\em inner product} on a vector space is a function of
+two vectors with the following properties:
+\begin{enumerate}
+\item {\em Positive-definiteness}: $\langle x, x
+  \rangle \geq 0$; and $\langle x, x \rangle = 0$ iff $x = 0$
+\item {\em Linearity in the first argument}: $\langle \alpha x + y, z
+  \rangle = \alpha \langle x, z \rangle + \langle y, z \rangle$.
+\item {\em Sesquilinearity}: 
+  $\langle v, w \rangle = \overline{\langle w, v \rangle}$.
+\end{enumerate}
+A vector space with an inner product automatically inherits the norm 
+$\|v\| = \sqrt{\langle v, v \rangle}$.  We are used to seeing this as
+the standard two-norm with the standard Euclidean inner product, but
+the same concept works with other inner products.  Using an inner
+product and the associated norm, we can also define the notion of the
+angle between two vectors:
+\[
+  \cos(\theta_{v,w}) = \frac{\langle v,w \rangle}{\|v\| \|w\|}.
+\]
+
+\section*{Two special matrix types}
+
+The symmetric (Hermitian) positive definite matrices are analogous to
+the positive real numbers.  A matrix $H \in \bbR^{n \times n}$ is
+{\em symmetric positive definite} if $H = H^*$ is symmetric and the
+quadratic form
+\[
+  x \mapsto x^* H x
+\]
+is positive definite (i.e.~always non-negative, and zero iff $x = 0$).
+I have deliberately used $x^*$ and $H^*$ here, since the complex
+analogue of an SPD matrix is a {\em Hermitian} positive definite matrix.
+$H \in \bbC^{n \times n}$ is Hermitian if $H = H^*$.  The SPD and HPD
+matrices have all positive real eigenvalues, among other nice properties.
+
+In finite-dimensional vector spaces, any inner product can be
+identified with an SPD or HPD matrix:
+\[
+  \langle v, w \rangle_H = w^* H v.
+\]
+Furthermore, any SPD or HPD matrix can be factored as
+\[
+  H = M^* M
+\]
+where $M$ is nonsingular.  This factorization is not unique, and there
+are a few useful variants.  We will cover one of the most common ones,
+the Cholesky factorization (in which $M$ is upper triangular) next
+week.
+
+An {\em orthogonal} matrix $Q \in \bbR^{n \times n}$ satisfies $Q^* Q= I$.
+The complex analogue is called a {\em unitary} matrix.  Orthogonal
+matrices are special because they preserve Euclidean lengths and angles:
+\begin{align*}
+  (Q w)^* (Q u) &= w^* Q^* Q u = w^* u \\
+  \|Qu\|^2 &= \|u\|^2.
+\end{align*}
+These matrices are also special numerically, as we will see later.
+
+\section*{Matrix norms}
+
+Spaces of linear maps (or matrices) can also be treated as
+vector spaces, and the same definition of norms applies.  In general,
+though, we would like to consider norms on spaces of linear maps that
+are in some way compatible with the norms on the spaces they map
+between.
+
+If $A$ maps between two normed vector spaces $\calV$ and $\calW$,
+the {\em induced norm} on $A$ is
+\[
+  \|A\|_{\calV,\calW} = \sup_{v \neq 0} \frac{ \|Av\|_{\calW} }{ \|v\|_{\calV} }.
+\]
+Because norms are homogeneous with respect to scaling, we also have
+\[
+  \|A\|_{\calV,\calW} = \sup_{\|v\|_{\calV} = 1} \|Av\|_{\calW}.
+\]
+Note that when $\calV$ is finite-dimensional (as it always is in this
+class), the unit ball $\{v \in \calV : \|v\| = 1\}$ is compact, and
+$\|Av\|$ is a continuous function of $v$, so the supremum is actually
+attained.
+
+These operator norms are indeed norms on the space $\mathcal{L}(\calV,
+\calW)$ of bounded linear maps between $\calV$ and $\calW$ (or norms
+on vector spaces of matrices, if you prefer).
+Such norms have a number of nice properties, not the least of
+which are the submultiplicative properties
+\begin{align*}
+  \|Av\| & \leq \|A\| \|v\| \\
+  \|AB\| & \leq \|A\| \|B\|.
+\end{align*}
+The first property ($\|Av\| \leq \|A\| \|v\|$) is clear from the
+definition of the vector norm.  The second property is almost as easy
+to prove:
+\begin{align*}
+  \|AB\| =    \max_{\|v\| = 1} \|ABv\| 
+         \leq \max_{\|v\| = 1} \|A\| \|Bv\|
+         = \|A\| \|B\|.
+\end{align*}
+
+The matrix norms induced when $\calV$ and $\calW$ are supplied with a 1-norm,
+2-norm, or $\infty$-norm are simply called the matrix 1-norm, 2-norm,
+and $\infty$-norm.  The matrix 1-norm and $\infty$-norm are given by
+\begin{align*}
+  \|A\|_1       &= \max_{j} \sum_{i} |A_{ij}| \\
+  \|A\|_{\infty} &= \max_{i} \sum_{j} |A_{ij}|.
+\end{align*}
+These norms are nice because they are easy to compute.  Also easy to
+compute (though it's not an induced operator norm) is the {\em Frobenius}
+norm
+\[
+  \|A\|_F = \sqrt{\operatorname{tr}(A^*A)} = \sqrt{\sum_{i,j} |A_{ij}|^2}.
+\]
+The Frobenius norm is not an operator norm, but it does satisfy the
+submultiplicative property (i.e. it is {\em consistent} with the
+vector 2-norm).
+
+\section*{The 2-norm and the SVD}
+
+The matrix 2-norm is very useful, but it is also not so straightforward
+to compute.  The computation of the matrix 2-norm leads us naturally
+to the {\em singular value decomposition}, which also often appears in
+data analysis (PCA).  The SVD is a decomposition
+\[
+  A = U \Sigma V^T
+\]
+where $U$ and $V$ are orthogonal and $\Sigma$ is a diagonal matrix
+with positive diagonal entries, which are conventionally listed in
+descending order.  This is useful for computing norms
+because we know that multiplication by orthogonal matrices doesn't
+change the Euclidean length.  Therefore,
+\[
+\frac{\|Ax\|}{\|x\|} =
+\frac{\|U \Sigma V^T x\|}{\|x\|} =
+\frac{\|\Sigma y\|}{\|y\|} \mbox{ where } y = V^T x.
+\]
+and $\|A\| = \max_{y \neq 0} \|\Sigma y\|/\|y\| = \sigma_{\max}$,
+where $\sigma_{\max}$ is the largest of the singular values.
+Note that if $A = U \Sigma V^T$ and $A$ is invertible, then
+\[
+  A^{-1} = V \Sigma^{-1} U^T
+\]
+and $\|A^{-1}\| = \sigma_{\min}^{-1}$.
+
+Here's another way of thinking about the matrix 2-norm, which again
+leads to singular values.  We may not get to this in lecture,
+but I will mention it anyhow, since it previews some ideas we will
+need when we tackle optimization later in the class.
+If $A$ is a real matrix, then we have
+\begin{align*}
+  \|A\|_2^2 
+    &= \left( \max_{\|v\|_2 = 1} \|Av\| \right)^2 \\
+    &= \max_{\|v\|_2^2 = 1} \|Av\|^2 \\
+    &= \max_{v^T v = 1} v^T A^T A v.
+\end{align*}
+This is a constrained optimization problem, to which we will apply the
+method of Lagrange multipliers: that is, we seek critical points for
+the functional
+\[
+  L(v, \mu) = v^T A^T A v - \mu (v^T v-1).
+\]
+Differentiate in an arbitrary direction $(\delta v, \delta \mu)$ to find
+\begin{align*}
+  2 \delta v^T (A^T A v - \mu v) & = 0, \\
+  \delta \mu (v^T v-1) & = 0.
+\end{align*} 
+Therefore, the stationary points satisfy the eigenvalue problem
+\[
+  A^T A v = \mu v.
+\]
+The eigenvalues of $A^T A$ are non-negative (why?), so we will call
+them $\sigma_i^2$.  The positive values $\sigma_i$ are the singular
+values of $A$; and, as we saw a moment ago, the largest of these
+singular values is $\|A\|_2$.
+
+
+\end{document}
