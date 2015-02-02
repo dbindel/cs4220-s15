@@ -1,0 +1,23 @@
+\documentclass[12pt, leqno]{article}
+\input{common}
+
+\begin{document} \hdr{PS 3}{Weds, Feb 11}
+
+\paragraph*{1: By the book}
+Book section 2.5, p10, 11; section 4.6, p16.
+
+\paragraph*{2: Definitions}
+Let $\hat{x} = 32$ be regarded as an approximation to the positive
+solution for $f(x_*) = x_*^2 - 1000 = 0$.  What are the absolute
+error, the relative error, and the residual error?
+
+\paragraph*{3: Pi, see!}
+The following routine estimates $\pi$ by recursively computing the
+semiperimeter of a sequence of $2^{k+1}$-gons embedded in the unit circle:
+\lstset{language=matlab,frame=lines,columns=flexible}
+\lstinputlisting{ps3pibad.m}
+Plot the absolute error $|s_k-\pi|$ against $k$ on a semilog plot.
+Explain why the algorithm behaves as it does, and describe a
+reformulation of the algorithm that does not suffer from this problem.
+
+\end{document}

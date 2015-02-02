@@ -1,6 +1,7 @@
 PDFS=\
 	ps1.pdf \
-	ps2.pdf 
+	ps2.pdf \
+	ps3.pdf
 
 .PHONY: all clean distclean copy
 all: $(PDFS)
