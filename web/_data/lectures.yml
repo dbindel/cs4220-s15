@@ -80,7 +80,7 @@
   hw:
     - Read 5.1-5.2
     - PS3 due
-    - <span style="text-decoration: line-through;">PS4 out</span>
+    - PS4 out
 -
   date: 2015-02-11
   info: |
@@ -108,8 +108,8 @@
     Banded and sparse Gaussian elimination
   hw:
     - Read 5.6-5.7
-    - <span style="text-decoration: line-through;">PS4 due</a>
-    - [PP1 out](hw/proj1.pdf)
+    - PS4 due
+    - <a href="hw/proj1.pdf">PP1 out</a>
 -
   date: 2015-02-20
   info: |
