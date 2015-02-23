@@ -1,0 +1,53 @@
+\documentclass[12pt, leqno]{article}
+\input{common}
+
+\begin{document} \hdr{PS 3}{Weds, Feb 11}
+
+{\bf Note:} My solutions this week fit on the front and back of a page
+(typed), including the graph for problem 1 and problem text.  Don't
+overthink these!
+
+\paragraph*{1: By the book}
+Book problem 6.4.1.
+
+\paragraph*{2: QR to SVD}
+Suppose $A = QR$ is an economy QR factorization.  Show that the
+singular values of $A$ are the same as those of $R$.
+
+\paragraph*{3: Vector projector}
+Suppose $A \in \bbR^{m \times n}$ where $m > n$ has full column rank.
+Given $A$ and a vector $b$, write one line of MATLAB to compute the
+element $c$ in the range space of $A$ that is nearest to $b$
+(in the Euclidean norm).
+
+\paragraph*{4: Generally speaking}
+Often, we use least squares to construct models of the world.  We
+assume that the ``truth'' is
+\[
+  Ax = b,
+\]
+but what we measure is the first few rows of $A$ and $b$ (which we
+write as $A_1$ and $b_1$), and those measurements are corrupted by
+noise.  Suppose we have $A$ exactly, but only get the noisy
+partial right hand side $\hat{b}_1 = b_1+e_1$, from which we form
+\[
+  \mbox{minimize } \|A_1 \hat{x} - \hat{b}_1\|^2.
+\]
+Our goal in this problem is to use the error analysis ideas in
+Section 6.2 to figure out the inherited error in the reconstruction
+of $\hat{b}_2 = A_2 \hat{x}$.
+\begin{enumerate}
+\item
+  Let $e_2 = \hat{b}_2-b_2$.  Argue {\em briefly} that
+  $e_2 = A_2 A_1^\dagger e_1$.
+\item
+  Show that
+  \[
+    \frac{\|e_2\|}{\|b_2\|} \leq \kappa(A_2 A_1^\dagger) \frac{\|e_1\|}{\|b_1\|}.
+  \]
+\end{enumerate}
+Things get somewhat more complicated if we also allow the entries of
+$A$ to be contaminated by error, though the same basic ingredients
+come into play.
+
+\end{document}

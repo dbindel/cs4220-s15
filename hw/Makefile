@@ -2,6 +2,7 @@ PDFS=\
 	ps1.pdf \
 	ps2.pdf \
 	ps3.pdf \
+	ps5.pdf \
 	proj1.pdf
 
 .PHONY: all clean distclean copy
