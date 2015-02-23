@@ -131,7 +131,6 @@
     Gram-Schmidt and Householder QR
   hw:
     - Read 6.2-6.3
-    - PP1 due
 -
   date: 2015-02-27
   info: |
@@ -145,7 +144,7 @@
   info: |
     Review
   hw:
-    - PP1 reviews
+    - PP1 due
     - PS5 due
 -
   date: 2015-03-04
@@ -156,6 +155,7 @@
   info: |
     Intro to iterative methods
   hw:
+    - PP1 reviews
     - Read 7.1-7.3
 #
 # ==================
