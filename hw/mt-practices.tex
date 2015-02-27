@@ -1,0 +1,156 @@
+\documentclass[12pt, leqno]{article}
+\usepackage{amsthm}
+\input{common}
+
+\begin{document} \phdr{Practice Midterm}
+
+This is around the right scale and form for a midterm for 4220, but it may
+be somewhat harder or easier than the actual midterm.  The actual exam
+will be open book and notes, but limited to 50 minutes.  In evaluating
+yourself, you may want to try the exam under those conditions.
+
+\paragraph*{1: True/False}
+\begin{enumerate}
+\item
+  Suppose $Ax = b$ and $(A+E) \hat{x} = b$.
+  Then $\|\hat{x}-x\| \leq \kappa(A) \|E\|$.
+\item
+  If $a$ and $b$ are normalized floating point numbers and $a+b$ is in
+  the range of normalized floating point numbers, then
+  $\fl(a+b) = (a+b)(1+\delta)$ where $|\delta| \leq \macheps$.
+\item
+  Newton's iteration is quadratically convergent for $f(x) = x^2 = 0$
+  for starting points sufficiently near zero.
+\item
+  If $A$ is singular, Gaussian elimination cannot compute $PA = LU$.
+\item
+  In Gaussian elimination with partial pivoting, all elements of $L$
+  below the main diagonal have magnitude at most one.
+\end{enumerate}
+
+{\bf Answer:}
+\begin{enumerate}
+\item {\bf False}.  The condition number relates relative errors, not
+  absolute errors.
+\item {\bf True}.
+\item {\bf False}.  In this case, Newton's iteration is $x_{k+1} =
+  x_k/2$, which converges linearly.  We saw something like this in a
+  homework.
+\item {\bf False}.  Singular matrices can have $LU$ factorizations;
+  consider
+  \[
+  L = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \quad
+  U = \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}
+  \]
+\item {\bf True}.  This is the point of partial pivoting.
+\end{enumerate}
+
+\paragraph*{2: Fixed point fandango}
+Consider the iteration
+\[
+  x_{k+1} = 10-\exp(x_k).
+\]
+The iteration has a fixed point $x_* \approx 2.0706$.  For $x_0$
+close enough to $x_*$, does the iteration converge?  Explain
+by writing an error recurrence.
+
+{\bf Answer:}
+The iteration equation is
+\[
+  e_{k+1} = -(\exp(x_*+e_k)-\exp(x_*)) = -\exp(x_*) e_k + O(e_k^2)
+\]
+Because $|\exp(x_*)| > 1$, the iteration diverges in general.
+
+\paragraph*{3: Norm!}
+The {\em Frobenius norm} of a matrix $A$ is
+\[
+  \|A\|_F = \sqrt{ \sum_{i,j} a_{ij}^2 }.
+\]
+Show
+\begin{enumerate}
+\item
+  The Frobenius norm is not an operator norm (hint: consider
+  $\|I\|_F$).
+\item
+  The Frobenius norm is consistent with the two norm, i.e.
+  \[
+    \|Av\|_2 \leq \|A\|_F \|v\|_2.
+  \]
+  {\em Hint:} The Cauchy-Schwarz inequality states $|x \cdot y| \leq
+  \|x\|_2 \, \|y\|_2$.
+\end{enumerate}
+
+{\bf Answer:}
+\begin{enumerate}
+\item
+  For an operator norm,
+  \[
+    \|I\| = \max_{x \neq 0} \|x\|/\|x\| = 1.
+  \]
+  For the Frobenius norm, $\|I\|_F = \sqrt{n}$.
+\item
+  By Cauchy-Schwarz,
+  \[
+    (Av)_i^2 \leq \|A(i,:)\|_2^2 \|v\|_2^2
+  \]
+  Summing over $i$, we have
+  \[
+    \|Av\|_2^2 \leq \|A\|_F^2 \|v\|_2^2
+  \]
+\end{enumerate}
+
+\paragraph*{4: Pseudoinverse}
+Suppose $A \in \bbR^{n \times m}$ has full column rank, $n > m$.
+\begin{enumerate}
+\item
+  Write the pseudoinverse in terms of $A$, the economy QR
+  factorization of $A$, and the economy SVD of $A$.
+\item
+  Show that if $n = m$, then the pseudoinverse is the same as the
+  inverse.
+\item
+  Give a {\em brief} geometric characterization of the null space of
+  $A^\dagger$.
+\end{enumerate}
+
+{\bf Answer:}
+\begin{enumerate}
+\item $A^\dagger = (A^TA)^{-1} A^T = R^{-1} Q^T = V \Sigma^{-1} U^T$
+\item $A^\dagger = (A^T A)^{-1} A^T = A^{-1} A^{-T} A^T = A^{-1}$ when
+  $A$ (and hence $A^T$) are square and invertible.
+\item The null space of $A^{\dagger}$ is those vectors orthogonal
+  to the range space of $A$.
+\end{enumerate}
+
+\paragraph*{5: Elimination and low rank}
+Consider the matrix
+\[
+  A = I + uv^T
+\]
+where $u$ and $v$ are elementwise positive, $\|u\|_1 < 1$ and $\|v\|_1 < 1$.
+\begin{enumerate}
+\item
+  $A$ must be diagonally dominant.  Briefly state why.
+\item
+  Show that after one step of Gaussian elimination,
+  the Schur complement has the form
+  \[
+    S = I + \alpha u_2 v_2^T.
+  \]
+  Write a simple expression for the coefficient $\alpha$.
+\end{enumerate}
+
+{\bf Answer:}
+\begin{enumerate}
+\item
+  Each column is $e_j + u v_j$.  The $j$th element is $1 + u_j > 1$;
+  the sum of the remaining element magnitudes is bounded by 
+  $\sum_i |u_i v_j| = \|u\|_1 |v_j| < 1$.
+\item
+  One step of Gaussian elimination gives
+  \[
+    S = I + \frac{u_1 v_1}{1 + u_1 v_1} u_2 v_2^T
+  \]
+\end{enumerate}
+
+\end{document}

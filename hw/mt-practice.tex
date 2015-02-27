@@ -1,0 +1,91 @@
+\documentclass[12pt, leqno]{article}
+\usepackage{amsthm}
+\input{common}
+
+\begin{document} \phdr{Practice Midterm}
+
+This is around the right scale and form for a midterm for 4220, but it may
+be somewhat harder or easier than the actual midterm.  The actual exam
+will be open book and notes, but limited to 50 minutes.  In evaluating
+yourself, you may want to try the exam under those conditions.
+
+\paragraph*{1: True/False}
+\begin{enumerate}
+\item
+  Suppose $Ax = b$ and $(A+E) \hat{x} = b$.
+  Then $\|\hat{x}-x\| \leq \kappa(A) \|E\|$.
+\item
+  If $a$ and $b$ are normalized floating point numbers and $a+b$ is in
+  the range of normalized floating point numbers, then
+  $\fl(a+b) = (a+b)(1+\delta)$ where $|\delta| \leq \macheps$.
+\item
+  Newton's iteration is quadratically convergent for $f(x) = x^2 = 0$
+  for starting points sufficiently near zero.
+\item
+  If $A$ is singular, Gaussian elimination cannot compute $PA = LU$.
+\item
+  In Gaussian elimination with partial pivoting, all elements of $L$
+  below the main diagonal have magnitude at most one.
+\end{enumerate}
+
+\paragraph*{2: Fixed point fandango}
+Consider the iteration
+\[
+  x_{k+1} = 10-\exp(x_k).
+\]
+The iteration has a fixed point $x_* \approx 2.0706$.  For $x_0$
+close enough to $x_*$, does the iteration converge?  Explain
+by writing an error recurrence.
+
+\paragraph*{3: Norm!}
+The {\em Frobenius norm} of a matrix $A$ is
+\[
+  \|A\|_F = \sqrt{ \sum_{i,j} a_{ij}^2 }.
+\]
+Show
+\begin{enumerate}
+\item
+  The Frobenius norm is not an operator norm (hint: consider
+  $\|I\|_F$).
+\item
+  The Frobenius norm is consistent with the two norm, i.e.
+  \[
+    \|Av\|_2 \leq \|A\|_F \|v\|_2.
+  \]
+  {\em Hint:} The Cauchy-Schwarz inequality states $|x \cdot y| \leq
+  \|x\|_2 \, \|y\|_2$.
+\end{enumerate}
+
+\paragraph*{4: Pseudoinverse}
+Suppose $A \in \bbR^{n \times m}$ has full column rank, $n > m$.
+\begin{enumerate}
+\item
+  Write the pseudoinverse in terms of $A$, the economy QR
+  factorization of $A$, and the economy SVD of $A$.
+\item
+  Show that if $n = m$, then the pseudoinverse is the same as the
+  inverse.
+\item
+  Give a {\em brief} geometric characterization of the null space of
+  $A^\dagger$.
+\end{enumerate}
+
+\paragraph*{5: Elimination and low rank}
+Consider the matrix
+\[
+  A = I + uv^T
+\]
+where $\|u\|_1 < 1$ and $\|v\|_1 < 1$.
+\begin{enumerate}
+\item
+  $A$ must be diagonally dominant.  Briefly state why.
+\item
+  Show that after one step of Gaussian elimination,
+  the Schur complement has the form
+  \[
+    S = I + \alpha u_2 v_2^T.
+  \]
+  Write a simple expression for the coefficient $\alpha$.
+\end{enumerate}
+
+\end{document}
