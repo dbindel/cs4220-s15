@@ -1,5 +1,8 @@
 \documentclass[12pt, leqno]{article}
+\usepackage{amsthm}
 \input{common}
+
+\newtheorem{lemma}{Lemma}
 
 \begin{document} \phdr{Proj 1: All Roads Lead to Fresno}
 
@@ -95,13 +98,10 @@ on $I-\alpha T$ will work fine.
 
 Once you have downloaded the data set, you can use the following code
 to form the matrix $M = I-\alpha T$:
-\begin{lstlisting}
-  alpha = 0.9;
-  n = length(A);
-  d = full(sum(A))';
-  T = A * spdiags(1./d, 0, n, n);
-  M = speye(n) - alpha*T;  
-\end{lstlisting}
+\lstinputlisting{proj1code/problem_load.m}
+
+As a test case, you might want to consider trying to get your random
+walker to start at node $1$ and arrive at node $180$.
 
 \paragraph*{Task 1}
 Solve the linear system $Mu = e_1$ using MATLAB's sparse backslash
@@ -131,6 +131,30 @@ LU (with column pivoting), write a short MATLAB expression to solve
 $Mu = e_1$ without re-factoring $M$ (which is what happens if you use
 the backslash operator on $M$ directly).
 
+{\bf Notes:} For Tasks 2-3 (particularly Task 2), it will be helpful
+to look up the concept of {\em diagonal dominance} (it's mentioned
+briefly in the book in the discussion of Gaussian elimination).  A
+matrix $M$ is {\em strictly (column) diagonally dominant} if the
+magnitudes of diagonal elements are bigger than the sum of the
+magnitudes of off-diagonal elements; that is,
+\[
+  \forall i, ~ |m_{ii}| > \sum_{j \neq i} |m_{ij}|.
+\]
+  
+A strictly diagonally dominant matrix is automatically nonsingular,
+since if $D$ is the diagonal of the matrix, then
+\[
+  D^{-1} M = I + D^{-1} (M-D)
+\]
+and $\|D^{-1} (M-D)\|_1 < 1$.  Therefore, we can write down the
+inverse as a convergent series (called a geometric series or a Neumann
+series depending on context), just as we did when setting up this
+problem.
+
+Factoring a strictly diagonally dominant matrix also involves
+{\em no pivoting} when performing Gaussian elimination with partial
+pivoting.
+
 \section*{The Optimization}
 
 Your goal is to maximize
@@ -138,7 +162,16 @@ Your goal is to maximize
   f(a,b) = e_t^T \hat{M}(a,b)^{-1} e_s
 \]
 where $\hat{M}(a,b)$ is the matrix associated with removing the edge
-$(a,b)$.  You do {\em not} want to have to form, factor, and solve
+$(a,b)$.  For example, in the road network,
+$(M^{-1})_{180,1} = 0.1176178$, but
+$(\hat{M}(1,2)^{-1})_{180,1} = 0.1788743$.  It turns out that this is
+the edge removal that maximizes this element.  On my laptop,
+a back-of-the-envelope calculation suggests that it would take most
+of a year to do this computation naively.  On the other hand,
+I was able to run the computation in about 15 seconds on my laptop
+using a few tricks, which I hope you will try to replicate.
+
+You do {\em not} want to have to form, factor, and solve
 a linear system involving $\hat{M}(a,b)$ for every edge $(a,b)$ in
 the network; you'll want to be smarter than that.  We will use
 two tricks: low rank structure and norm bounds.
@@ -160,29 +193,33 @@ advantage of the LU factorization of $M$ (or the Cholesky
 factorization of $N$), you should try to precompute as much as
 possible so that you don't have to solve too many linear systems.
 
-\paragraph*{Task 7}
-For any consistent norm, if $\|B\| < 1$ then
+\paragraph*{Task 7} (Extra credit)
+Find a way to bound
 \[
-  \|(I+B)^{-1}\| \leq \frac{1}{1-\|B\|}.
+  f(a,b) - e^T M^{-1} e_s
 \]
-This is sometimes called a Neumman series bound or geometric series
-bound.  You do not have to prove it.  In particular, this means that
+that does not require any additional linear solves after
+pre-processing.  For example, if $t \not \in \{a, b\}$,
+one can show
 \[
-  \|(I-\alpha T)^{-1}\|_{1} \leq \frac{1}{1-\alpha},
+|f(a,b) - e^T M^{-1} e_s| \leq
+\frac{1}{d_t}
+\left( \frac{1+\alpha}{1-\alpha} \right)
+\left( \frac{w_a}{d_a-1} + \frac{w_b}{d_b-1} \right).
 \]
-since the column sums of $T$ are all normalized to 1.
+where $d_k$ is the degree of the node $k$ (before the update)
+and $w = N^{-1} e_t$.
 
-In your Sherman-Morrison-Woodbury formula, there should be one place
-where you cannot precompute the solution to a linear system involving
-the matrix $M$ or $N$.  Use this bound, along with what you know more
-generally about norm bounds, to compute an upper bound on the effect
-of changing an edge in the matrix.  After a little precomputation good
-for all edges, you should be able to evaluate your bound with {\em no}
-extra linear solves.
-
-\paragraph*{Task 8}
+\paragraph*{Task 8} (Extra credit)
 Combine the results of tasks 6-7 to find the optimal edge, neglecting
 any edges from consideration that change the value of $f$ by less than
-a tolerance $\tau = 10^{-3}$.
+a tolerance $\tau = 10^{-3}$.  You may also neglect any edge involving
+a degree one node.
+
+\paragraph*{Notes:}
+Actually proving the bound in Task 7 is tricky, and is worth
+significant extra credit.  Using the bound as specified in Tasks 7 and
+8 is more straightforward, and is worth a more modest bonus (but nontrivial).
+
 
 \end{document}
