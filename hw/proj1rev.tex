@@ -1,0 +1,113 @@
+\documentclass[12pt, leqno]{article}
+\usepackage{amsthm}
+\input{common}
+
+\newtheorem{lemma}{Lemma}
+
+\begin{document} \phdr{Proj 1: Review Directions}
+
+Please read and comment on the two project submissions your group has
+been assigned to review.  Your reviews should point out any flaws that
+you see, but please remain constructive.  And point out
+strengths as well!
+
+While the review process is meant to provide groups with feedback,
+it is not meant to be an undue burden on the reviewers.  If you cannot
+understand what's going on in a particular argument, feel free to say
+so and move on -- just try to distinguish in your review whether the
+issue is that you found the solution unclear or that you found an
+error in the solution.
+
+In your reviews, please point out any tasks for which you can see that
+the submission is incomplete or incorrect.  I provide a reference
+(expensive) computation for comparison against the computations
+in Tasks 4--6.  In your review, please comment on whether you see any
+evidence that the submission includes computational sanity checks.
+
+When submitting your reviews on CMS, please make sure that you
+submit them in the correct order (i.e.~my first request matches
+your {\tt review1.pdf}).  Otherwise, your review may end up being
+sent to the wrong group.
+
+\paragraph*{Task 1}
+Is the time consistent with what you saw?  The time may vary depending
+on whether $e_1$ is formed as a dense vector or a sparse vector; the
+latter will be slower than the former.
+
+\paragraph*{Task 2}
+\begin{enumerate}
+\item
+  Did the call to {\tt lu} have four output arguments?  If not, this is
+  doing LU without column pivoting.  Similarly, note that any calls to
+  {\tt chol(N)} that you see should have three output arguments, i.e.
+  {\tt [R,p,S] = chol(N)}.
+\item
+  Is there an argument about why $PQ = I$?  Are you convinced?
+\end{enumerate}
+
+\paragraph*{Task 3}
+There are several ways to argue that $N$ is positive definite.  Is the
+argument made in this project convincing and free of algebra errors?
+
+\paragraph*{Task 4}
+Is the code correct?  In particular, you should check to see that
+\begin{enumerate}
+\item
+  The solve involves no matrix-matrix products.  If all is done
+  correctly, every operation should involve a matrix and a vector.
+  Remember order of operations!
+\item
+  The computation with the factors should be much faster than the
+  computation in Task 1 (not including the time to compute the
+  factorization).
+\item
+  The value computed with the given expression matches the value from
+  Task 1, up to rounding error.  That is, if {\tt xfac} is the value
+  computed with the factorization and {\tt x} is the value from Task
+  1, then {\tt norm(x-xfac)/norm(x)} should be on the order of a few
+  times $10^{-16}$.
+\end{enumerate}
+
+\paragraph*{Task 5}
+\begin{enumerate}
+\item
+  Is the update written in the form $\hat{N} = N + UCV^T$ where
+  $U, V \in \bbR^{n \times 2}$ and $C \in \bbR^{2 \times 2}$?
+  Alternately, is there an update to $\hat{M}$ of this form?
+\item
+  Does the update correctly account for all elements that have
+  changed?  Please sanity check this against recomputing $\hat{N}$
+  or $\hat{M}$ from scratch based on $\hat{A}$ for the edge $(1,2)$,
+  which you can compute with the code
+  \begin{lstlisting}
+    hatA = A;
+    hatA(1,2) = 0;
+    hatA(2,1) = 0;
+  \end{lstlisting}
+\end{enumerate}
+
+\paragraph*{Task 6}
+\begin{enumerate}
+\item
+  Does the code compute the solution for the modified problem?  As in
+  the sanity check for Task 5, it will be useful to compare against
+  a reference computation (e.g.~one where the edge $(1,2)$ is
+  removed).
+\item
+  Does the code run significantly faster than the original
+  factorization?
+\item
+  Is there some indication of how the code can be run in stages
+  (i.e. a precomputation independent of $(a,b)$, and a relatively
+  cheap computation depending on $(a,b)$)?
+\end{enumerate}
+
+\paragraph*{Task 7} (Extra credit)
+Can you follow the logic in the bound?
+
+\paragraph*{Task 8} (Extra credit)
+Does the computation appear reasonable?  Can you reproduce any claimed
+results by running the code?
+
+
+\end{document}
