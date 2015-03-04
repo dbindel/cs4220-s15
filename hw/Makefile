@@ -4,6 +4,7 @@ PDFS=\
 	ps3.pdf \
 	ps5.pdf \
 	proj1.pdf \
+	proj2.pdf \
 	proj1rev.pdf \
 	mt-practice.pdf \
 	mt-practices.pdf
@@ -26,4 +27,5 @@ copy: $(PDFS)
 	cp $(PDFS) ../web/hw
 
 %.pdf: %.tex
+	pdflatex $<
 	pdflatex $<
