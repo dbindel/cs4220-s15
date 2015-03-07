@@ -139,7 +139,7 @@ must run on the machines in the CSUGlab.
 There will be one midterm and one final exam:
 
  - Midterm: Weds, Mar 4 (estimated)
- - Final exam: TBA
+ - Final exam: Thurs, May 14 at 7:00 PM in Malott Hall 251
 
 All three exams are closed book, but you may bring one letter-sized piece
 of paper with writing on both sides.
