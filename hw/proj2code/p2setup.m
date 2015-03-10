@@ -13,7 +13,9 @@ function [imblurd, height, width, H] = p2setup()
   imblur = imread('blurry.png');
   height = size(imblur,1);
   width  = size(imblur,2);
-  H      = formH(fspecial('motion', 30, 25), height, width);
+  %K     = fspecial('motion', 30, 25);
+  K      = load('K.mat', '-ascii');
+  H      = formH(K, height, width);  
   imblurd = reshape(double(imblur),height*width,3);
 
 % ===
