@@ -1,0 +1,43 @@
+\documentclass[12pt, leqno]{article}
+\input{common}
+
+\begin{document} \hdr{PS 6}{Fri, Mar 27}
+
+{\bf Note:} While it is not assigned, you may wish to look at problem
+10 if you're still thinking about Project 2.
+
+\paragraph*{1: By the book}
+Book section 8.4, problem 7, parts (a), (b), and (c).  For part (d),
+you may also assume the initial vector $v_0$ is non-negative.
+
+\paragraph*{2: Simply SVD}
+Consider the iteration
+\begin{lstlisting}
+  for k=1:kmax
+    u = A*v;  s = norm(u); u = u/s;
+    v = A'*u; s = norm(v); v = v/s;
+  end
+\end{lstlisting}
+Argue that {\tt u}, {\tt v}, and {\tt s} correspond to the first left
+and right singular vectors $u_1$ and $v_1$ and the dominant singular
+value $\sigma_1$, assuming $\sigma_1 > \sigma_2$.  What is the rate
+of convergence?
+
+\paragraph*{2: Subspace iteration}
+Implement orthogonal iteration on a $m$-dimensional space
+(see the book, page 239).  Your function should have the interface
+\begin{lstlisting}
+  function [V,R] = p6subspace(A, m, maxiter, rtol)
+\end{lstlisting}
+and should iterate until either {\tt maxiter} iterations have been
+reached or until the approximation $V^{(k)}$ satisfies the tolerance
+\[
+  \|A V^{(k)} - V^{(k)} R^{(k)}\|_F < \mbox{rtol}.
+\]
+You should start your iteration with a random orthogonal basis, which
+you can compute with the line
+\begin{lstlisting}
+  [V,R] = qr(randn(n,m), 0);
+\end{lstlisting}
+
+\end{document}
