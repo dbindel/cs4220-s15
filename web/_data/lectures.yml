@@ -192,16 +192,16 @@
 #
 -
   date: 2015-03-16
-  info: Guest lecture
+  info: "Guest lecture: Intro to eigenproblems"
   hw:
-    - PS6 out
 -
   date: 2015-03-18
   info: |
-    Introduction to eigenproblems
+    Power method and subspace iteration
   hw:
     - Read 8.1
     - PP2 due
+    - PS6 out
 -
   date: 2015-03-20
   info: |
@@ -217,7 +217,6 @@
   hw:
     - Read 8.2
     - PP2 reviews
-    - PS6 due
 -
   date: 2015-03-25
   info: |
@@ -230,6 +229,7 @@
     Templates for eigenproblems
   hw:
     - PP2 final
+    - PS6 due
 #
 # ==================
 # Week 11 (spring break)
