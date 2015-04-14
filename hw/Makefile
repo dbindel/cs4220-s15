@@ -7,6 +7,7 @@ PDFS=\
 	ps7.pdf \
 	proj1.pdf \
 	proj2.pdf \
+	proj3.pdf \
 	proj1rev.pdf \
 	mt-practice.pdf \
 	mt-practices.pdf
