@@ -1,0 +1,201 @@
+\documentclass[12pt, leqno]{article}
+\input{common}
+
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calR}{\mathcal{R}}
+
+\begin{document}
+\hdr{2015-04-20}
+
+Not all of these problems would be suitable as exam questions, but
+many of the ideas exercised (e.g.~block Gaussian elimination,
+understanding convergence from a semi-logarithmic plot of residuals vs
+iterations, and writing an error iteration to analyze local
+convergence of a fixed point iteration) are things that I would expect
+you to be able to do on an exam.
+
+\paragraph*{1: A different iteration}
+In project 3, you are asked to solve a system of equations
+for an equilibrium position of a electrostatically actuated
+cantilever subject to displacement control:
+\[
+F(u,V^2) =
+\begin{bmatrix}
+  Ku-V^2 \hat{f_e}(u) \\
+  e_{\mathrm{tip}}^T u - d
+\end{bmatrix}
+\]
+Consider the fixed point iteration
+\[
+  x^{(k+1)} = x^{(k)} - \hat{J}_k^{-1} F(x^{(k)}), \quad x
+  \equiv \begin{bmatrix} u \\ V^2 \end{bmatrix}
+\]
+where
+\[
+\hat{J}_k =
+\begin{bmatrix}
+  K & -\hat{f}_e(u) \\
+  e_{\mathrm{tip}}^T & 0
+\end{bmatrix}.
+\]
+\begin{enumerate}
+\item Why is this not Newton's method?
+\item Describe how to compute each iterate with one solve with a
+  pre-factored system (assuming the Cholesky factorization of $K$ is
+  computed at the outset)
+\item Why is the constraint $e_{\mathrm{tip}} u^{(k)} = d$ always
+  satisfied for $k > 0$?
+\end{enumerate}
+
+{\bf Answer:}
+\begin{enumerate}
+\item The Jacobian of $F$ has $K-V^2 \partial \hat{f}_e/\partial u$
+  in the $(1,1)$ block.  Since our iteration only involves $K$ in the
+  $(1,1)$ block, it is not Newton.
+\item We can solve the update equation
+  \[
+  \begin{bmatrix}
+    K & -\hat{f}_e \\
+    e_{\mathrm{tip}}^T & 0
+  \end{bmatrix}
+  \begin{bmatrix} \Delta u \\ \Delta V^2 \end{bmatrix} =
+  \begin{bmatrix} F_1 \\ F_2 \end{bmatrix}
+  \]
+  by block Gaussian elimination.  This yields
+  \begin{align*}
+    w_{\mathrm{tip}} &= K^{-1} e_{\mathrm{tip}} \\
+    \Delta V^2 &=
+      \frac{F_2-w_{\mathrm{tip}}^T F_1}
+           {w_{\mathrm{tip}}^T \hat{f}_e} \\
+    K \, \Delta u &= F_1 - \Delta V^2 \, \hat{f}_e
+  \end{align*}
+  The solve to compute $w_{\mathrm{tip}}$ can be done once in a
+  pre-computation phase, and does not need to be recomputed after.
+  The solve for $\Delta u$ is the only solve that needs to be
+  computed at each iteration, and it can be done with two
+  triangular solves using the Cholesky factorization $K = R^T R$.
+\item The constraint $e_{\mathrm{tip}} u^{(k)} = d$ is always
+  satisfied for $k > 0$ because of the second update equation:
+  \[
+    e_{\mathrm{tip}}^T \Delta u^{(k)} =e_{\mathrm{tip}}^T u^{(k)}-d.
+  \]
+  Rearranging terms yiels
+  \[
+    e_{\mathrm{tip}}^T u^{(k+1)} =  
+    e_{\mathrm{tip}}^T \left( u^{(k)}-\Delta u^{(k)} \right) = d.
+  \]
+\end{enumerate}
+
+
+\paragraph*{2: Rates of convergence}
+Typically, we plot residuals or errors on a semi-logarithmic plot in
+order to visually verify convergence behaviors.  How can we
+numerically test that $\|r^{(k+1)}\| \approx C \|r^{(k)}\|^q$ by
+looking at successive residuals?  If the residual in Newton's method
+decreases quadratically, must the error also decrease quadratically?
+
+{\bf Answer:}
+The natural thing to do is to look at logarithms.  Under this model,
+\[
+  \log \frac{\|r^{(1)}\|}{\|r^{(0)}\|} \approx q
+  \log \frac{\|r^{(2)}\|}{\|r^{(1)}\|}.
+\]
+We can also compute the constant $C$ from three successive residuals.
+
+This may be worth doing when looking at a linearly convergent
+iteration; for quadratically convergent iterations, there are
+typically only one or two steps between when convergence kicks in
+and when the iteration is dominated by roundoff.  In this case,
+a picture can be much more illuminating than a number.
+
+If the Jacobian at the solution is nonsingular at the solution
+to a system of nonlinear equation, then the error close to
+convergence is well approximated by $J_*^{-1}$ times the residual,
+and so quadratic convergence of the residual implies quadratic
+convergence of the error.
+
+\paragraph*{3: Pseudoinverse sensitivity}
+Assuming $A \in \bbR^{m \times n}$ is full column rank,
+what is the first-order term $L$ in the Taylor expansion
+\[
+(A+\delta A)^\dagger = A^\dagger + \delta \left[ A^\dagger \right] +
+                      O(\|\delta A\|^2)?
+\]
+
+{\bf Answer:}
+This problem involves two points: picking a useful representation
+for the pseudo-inverse, and understanding how to differentiate
+matrix-valued functions.  For the representation, recall that
+\[
+  (A+\delta A)^\dagger =
+  \left[ (A+\delta A)^T(A+\delta A) \right]^{-1} (A+\delta A)^T.
+\]
+Let's define the Gram matrix $G = A^T A$.  By the product rule
+\[
+  \delta \left[ A^\dagger \right] =
+    \delta \left[ G^{-1} \right] A^T + G^{-1} \, \delta A^T.
+\]
+The derivative of a matrix inverse is
+\[
+  \delta [G^{-1}] = -G^{-1} [\delta G] G^{-1},
+\]
+so, together with another application of the product rule, we have
+\[
+  \delta \left[ G^{-1} \right] =
+    -G^{-1} [(\delta A)^T A + A^T (\delta A)] G^{-1}
+\]
+Putting everything together, we have
+\[
+  \delta [A^\dagger] =
+    G^{-1} (\delta A)^T -
+    G^{-1} \left[ (\delta A)^T A + A^T (\delta A) \right] G^{-1}.
+\]
+This is a bit of a mess, but it actually is something we can use in
+computation.
+
+\paragraph*{4: Gauss-Newton}
+Show that Gauss-Newton iteration generally converges quadratically if the
+residual at the minimum is zero and the Jacobian at the origin is
+nonsingular, but linearly if the minimum residual is nonzero.
+
+{\bf Answer:}
+The Gauss-Newton iteration is
+\[
+  x_{k+1} = x_k - J_k^\dagger F_k
+\]
+where $J_k = \partial F(x_k)/\partial x$ and $F_k = F(x_k)$.
+Let $J_*$ denote the Jacobian at the solution $x_*$, let
+$x_k = x_* + e_k$, and note that
+\begin{align*}
+  F_k &= F_* + J_* e_k + O(\|e_k\|^2) \\
+  J_k^\dagger &= J_k + E_k + O(\|e_k\|^2)
+\end{align*}
+where $E_k$ is a complicated expression (see the previous problem).
+For our purposes, we mostly just care that $E_k = O(\|e_k\|)$.
+In this case, the error iteration for Gauss-Newton is
+\[
+  e_{k+1} = e_k - (J_*^\dagger + E_k) (F_* + J_* e_k) + O(\|e_k\|^2)
+\]
+Note that $J_*^\dagger F_* = 0$, $E_k J_* e_k = O(\|e_k\|^2)$,
+and $J_*^\dagger J_* e_k = e_k$, so
+\[
+  e_{k+1} = -E_k F_* + O(\|e_k\|^2)
+\]
+If $F_*$ is zero, we therefore have quadratic convergence.
+Otherwise, convergence is linear.
+
+One of the things that might cause us some concern is the possibility
+that Gauss-Newton might diverge.  Indeed, this is a possibility if one
+starts far from the solution, but the Gauss-Newton direction {\em is}
+a descent direction.  That is, looking at the Gauss-Newton direction
+$p_k = -J_k^\dagger F_k$ together with the gradient of the the
+objective function $\nabla \nabla = J_k^T F_k$ ($\phi = \|F\|^2/2$),
+we have
+\[
+  p^T \nabla \phi = -p^T (J_k^T J_k)^{-1} p.
+\]
+and if the Jacobian is nonsingular at the solution point, then
+$J_k^T J_k$ must be positive definite for points sufficiently nearby.
+
+\end{document}
