@@ -5,6 +5,7 @@ PDFS=\
 	ps5.pdf \
 	ps6.pdf \
 	ps7.pdf \
+	ps8.pdf \
 	proj1.pdf \
 	proj2.pdf \
 	proj3.pdf \

@@ -1,0 +1,53 @@
+\documentclass[12pt, leqno]{article}
+\input{common}
+
+\begin{document} \hdr{PS 8}{Wed, May 6}
+
+\paragraph*{1: Nearest Points}
+For a given point $(a,b) \in \bbR^2$, we want to find the nearest
+point $(x,y)$ that lies on the hyperbola $xy = 1$.
+\begin{enumerate}
+\item
+  Write a Lagrangian function $L(x,y,\lambda)$ such that the
+  desired point is a stationary point of $L$.
+\item
+  Write a Newton iteration to find the stationary point of $L$
+  for $(a,b) = (3,4)$.  Use the starting guess $(x,y,\lambda) =
+  (a,b,0)$, and demonstrate quadratic convergence.
+\end{enumerate}
+{\em Note:} As the point is to demonstrate a knowledge of Lagrange
+multipliers, we will not give credit for solutions that eliminate
+the constraint in advance.
+
+\paragraph*{2: Nonlinear Least Squares}
+In this problem, we consider a nonlinear least squares fitting problem
+in which we fit the coefficient vector $\beta$ defining a rational
+function
+\[
+  f(x; \beta) = \frac{\beta_1 + \beta_2 x + \beta_3 x^2 + \beta_4 x^3}
+                     {1 + \beta_5 x + \beta_6 x^2 + \beta_7 x^3}
+\]
+by minimizing
+\[
+  \phi(\beta) = \sum_j (f(x_j; \beta) - y_j)^2
+\]
+{\bf Your task:} Complete the MATLAB script {\tt ps8thuber.m} by
+filling in the code marked {\tt TODO} with an
+appropriate solver iteration.  You may use Gauss-Newton or
+Levenberg-Marquardt; I used Gauss-Newton with a line search (necessary
+to achieve convergence).  Terminate when $\|J^T (f-y)\| < 10^{-8}$.
+
+\paragraph*{3: Descent directions}
+Suppose that $H$ is symmetric and positive definite, and let
+$\tilde{p}$ be the solution to the system
+\[
+  H \tilde{p} = -\nabla \phi(x) + r
+\]
+where $r$ is a residual vector.  If
+$\kappa(H) = \lambda_{\max}(H)/\lambda_{\min}(H)$,
+show that if $\kappa(H) \|r\| < \|\nabla \phi\|$
+then $\tilde{p}$ is a descent direction. \\[2mm]
+{\em Hint:} Note that
+$\lambda_{\min}(H) \|u\| \|v\| \leq |u^T H^{-1} v| \leq \lambda_{\max}(H) \|u\| \|v\|$.
+
+\end{document}
