@@ -47,7 +47,17 @@ where $r$ is a residual vector.  If
 $\kappa(H) = \lambda_{\max}(H)/\lambda_{\min}(H)$,
 show that if $\kappa(H) \|r\| < \|\nabla \phi\|$
 then $\tilde{p}$ is a descent direction. \\[2mm]
-{\em Hint:} Note that
-$\lambda_{\min}(H) \|u\| \|v\| \leq |u^T H^{-1} v| \leq \lambda_{\max}(H) \|u\| \|v\|$.
+{\em Hint:} Note that if $A$ is any SPD matrix, then we have
+the two-norm bounds
+\[
+  \forall u, v, \quad
+  |u^T A v| \leq \|u\| \|A\| \|v\| = \lambda_{\max}(A) \|u\| \|v\|
+\]
+and
+\[
+  \min_{u \neq 0} \frac{u^T A u}{u^T u} = \lambda_{\min}(A),
+  \mbox{ so }
+  \forall u, u^T A u \geq \lambda_{\min}(A) \|u\|^2.
+\]
 
 \end{document}
