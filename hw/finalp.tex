@@ -1,0 +1,143 @@
+\documentclass[12pt, leqno]{article}
+\usepackage{amsthm}
+\input{common}
+
+\begin{document}
+  \pagestyle{fancy}
+  \lhead{NetID:}
+  \rhead{Numerical Analysis (CS 4220)}
+  \fancyfoot{}
+  \begin{center}
+    {\large{\bf Practice Final}}
+  \end{center}
+  \lstset{language=matlab,columns=flexible}
+
+The following problem set has 20 sub-problems.  This is likely too
+long for two hours, but see how much you can do -- most of the problems
+have simple answers.  In the exam, you may use any written material you want
+(textbook, notes, review notes, assignments and solutions, etc),
+but not a friend or the internet.
+
+\paragraph{1: About rates}
+Consider the iteration
+\[
+  x_{k+1} = x_k + \cos(x_k).
+\]
+\begin{enumerate}
+\item What are the fixed points?
+\item Classify each fixed point as attractive or repulsive.
+\item For the attractive fixed points, what is the rate of
+  convergence?
+\end{enumerate}
+
+\paragraph{2: Rewrite for accuracy}
+Consider $f(x) \equiv \sqrt{1+x}-\sqrt{1-x}$ when $x \ll 1$.
+Write a routine to compute $f$ without catastrophic cancellation.
+
+\paragraph{3: Q-less QR}
+MATLAB's sparse QR solver computes a ``$Q$-less'' QR decomposition,
+i.e. a sparse $R$ is computed explicitly but not the dense $Q$ factor.
+Given a sparse triangular $R$ and a sparse $A$, describe:
+\begin{enumerate}
+\item
+  How would one efficiently solve a least squares problem involving $A$?
+\item
+  Solves with Q-less QR iteration are less well-behaved than those
+  involving standard QR, and so a typical implementation will do a
+  step of iterative refinement.  Write a MATLAB fragment to describe
+  iterative refinement in this setting.
+\end{enumerate}
+
+\paragraph{4: Funky fill}
+Consider an SPD matrix with the nonzero pattern
+\[
+A =
+\begin{bmatrix}
+  \times &        &        & \times \\
+         & \times & \times & \times \\
+         & \times & \times &        \\
+  \times & \times &        & \times
+\end{bmatrix}.
+\]
+What is the nonzero structure of the Cholesky factor?
+
+\paragraph{5: Frobenius}
+Write a line of MATLAB to minimize $\|XA-B\|_F^2$
+where $X \in \bbR^{n \times m}$ is unknown and
+$A \in \bbR^{m \times p}$ and $B \in \bbR^{n \times p}$
+are given, with $m < p$.
+
+\paragraph{6: Residual}
+Suppose $r = Ax-b$ is the residual in a least squares problem.
+Given only $b$ and the $Q$ factor in an economy QR decomposition
+of $A$, what is $\|r\|$?
+
+\paragraph{7: Constrained LS}
+Write a routine to minimize $\|Ax-b\|^2$ subject to
+$\sum_{j=1}^n x_j = 1$.
+
+\paragraph{8: Transfer trouble}
+Suppose $A = Q H Q^T$ is upper Hessenberg.  Argue that
+the Hessenberg form provides a way of computing the transfer
+function $h(s) = c^T (A-sI)^{-1} b$ in $O(n^2)$ time for arbitrary
+$s$.  Give MATLAB code; you may assume backslash with a Hessenberg
+matrix requires $O(n^2)$ time (because it does!) -- explain why.
+
+\paragraph{9: Diagonal decisions}
+Consider the block $2 \times 2$ matrix
+\[
+  M = \begin{bmatrix} A & B \\ B & D \end{bmatrix}
+\]
+where $A, B, D \in \bbR^{n \times n}$ are orthogonal.
+Describe an efficient algorithm for computing
+all the eigenvalues of $M$.
+
+\paragraph{10: Jacobi jumble}
+What is the rate of convergence of Jacobi on a diagonal matrix?
+
+\paragraph{11: Killer Krylov}
+Suppose $\hat{A} = A + uv^T$.  Given $A^{-1}$ as a preconditioner,
+how many steps of a Krylov subspace method are required to solve
+a system with $\hat{A}$, and why?
+
+\paragraph{12: Line search}
+Does the Armijo condition for a line search guarantee that
+$\|x_{k+1}-x_*\| < \|x_k-x_*\|$?  Why or why not?
+
+\paragraph*{13: Simple solver}
+Suppose $(A + \eta \operatorname{diag}(x)) x = b$.  Under what
+conditions does the fixed point iteration
+\[
+  A x_{k+1} = b - \eta \operatorname{diag}(x_k) x_k
+\]
+converge?  Give a bound on the rate of convergence.
+
+\paragraph{14: Differential deal}
+Suppose $H$ is positive semi-definite, and consider the trust region
+step
+\[
+  (H + \lambda I) p = -\nabla \phi.
+\]
+show that at $\lambda = 0$, $dp/d\lambda = H^{-2} \nabla \phi$.
+
+\paragraph{15: Modified Gauss-Newton}
+Consider the Gauss-Newton-like iteration
+\[
+  p_k = M^{-1} J(x_k)^T r(x_k)
+\]
+where $M$ is a fixed positive definite matrix that we hope
+approximates the matrix $J^T J$ at the minimizer of $\phi(x) =
+\|r(x)\|^2/2$.
+\begin{enumerate}
+\item Write a short MATLAB code to implement the iteration
+  efficiently.  You may take $O(m n^2)$ setup time, but you should
+  only require $O(mn)$ time per step.
+\item Show that $p_k$ is a descent direction (so the iteration will
+  converge with line search).
+\item Give conditions on $M$ and $r$ such that the iteration is guaranteed
+  to be locally convergent without line search.  You may assume
+  the Jacobian satisfies a Lipschitz condition
+  $\|J(x)-J(y)\| \leq \gamma \|x-y\|$.
+\end{enumerate}
+
+\end{document}

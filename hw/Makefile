@@ -11,7 +11,8 @@ PDFS=\
 	proj3.pdf \
 	proj1rev.pdf \
 	mt-practice.pdf \
-	mt-practices.pdf
+	mt-practices.pdf \
+	finalp.pdf
 
 .PHONY: all clean distclean copy
 all: $(PDFS)
